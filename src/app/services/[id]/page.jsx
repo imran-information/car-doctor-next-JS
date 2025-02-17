@@ -1,5 +1,7 @@
 import Image from "next/image";
 import checkoutImage from "../../../../public/assets/images/checkout/checkout.png";
+import logo from "../../../../public/assets/logo-re.png";
+import endImage from "../../../../public/assets/images/checkout/2.jpg";
 import dbConnect, { collectionName } from "@/lib/dbConnect";
 import DownloadIcon from "@mui/icons-material/Download";
 import DescriptionIcon from "@mui/icons-material/Description";
@@ -10,7 +12,6 @@ export default async function ServiceDetailsPage({ params }) {
     const serviceId = await params.id;
     const serviceData = await dbConnect(collectionName.services).findOne({ _id: new ObjectId(serviceId) });
     const { title, img, price, _id, description, facility } = serviceData;
-    console.log(img);
     const services = [
         { name: "Full Car Repair", active: true },
         { name: "Engine Repair", active: false },
@@ -18,9 +19,13 @@ export default async function ServiceDetailsPage({ params }) {
         { name: "Engine Oil Change", active: false },
         { name: "Battery Charge", active: false },
     ];
-
+    const steps = [
+        { number: "01", title: "STEP ONE", description: "It Uses A Dictionary Of Over 200." },
+        { number: "02", title: "STEP TWO", description: "It Uses A Dictionary Of Over 200." },
+        { number: "03", title: "STEP THREE", description: "It Uses A Dictionary Of Over 200." }
+    ];
     return (
-        <div className="w-4/5 mx-auto my-32 overflow-x-hidden">
+        <div className="w-4/5 mx-auto my-32 mb-0 overflow-x-hidden">
             {/* Service Top Banner Section */}
             <section>
                 <figure className="relative w-full h-[350px] rounded-lg overflow-hidden">
@@ -56,7 +61,7 @@ export default async function ServiceDetailsPage({ params }) {
                         <div className="relative w-full h-[430px] overflow-hidden rounded-lg">
                             <div className="relative w-full h-[430px]">
                                 <Image
-                                    src="https://i.ibb.co/wh7t3N3/555.jpg"
+                                    src={img}
                                     alt="Service"
                                     fill
                                     className="object-cover"
@@ -66,7 +71,7 @@ export default async function ServiceDetailsPage({ params }) {
                         </div>
 
                         <h2 className="text-4xl font-bold text-[#151515] my-6">{title}</h2>
-                        <p className="text-lg text-[#555555] mb-4">{description}</p>
+                        <p className="text-lg text-[#555555] mb-4 text-justify">{description}</p>
 
                         {/* Facility Cards */}
                         <div className="grid md:grid-cols-2 gap-6 my-16">
@@ -77,6 +82,90 @@ export default async function ServiceDetailsPage({ params }) {
                                 </div>
                             ))}
                         </div>
+                        <p className="text-lg text-[#555555] mb-4 text-justify">{description}</p>
+                        <h2 className="text-4xl font-bold text-[#151515] mt-10">3 Simple Steps to Process</h2>
+                        <p className="text-lg text-[#555555] mt-5 text-justify">{description}</p>
+                        <div className="flex flex-col md:flex-row justify-center items-center py-10 gap-6 ">
+                            {steps.map((step, index) => (
+                                <div key={index} className="bg-white border border-gray-300 rounded-lg p-6 w-full  text-center shadow-md">
+                                    {/* Circular Number */}
+                                    <div className="w-20 h-20 bg-red-500 bg-opacity-10 flex items-center justify-center rounded-full mx-auto relative">
+                                        <div className="w-14 h-14 bg-red-500 text-white flex items-center justify-center rounded-full font-bold text-lg">
+                                            {step.number}
+                                        </div>
+                                    </div>
+
+                                    {/* Title */}
+                                    <h3 className="mt-4 text-xl font-bold text-gray-900">{step.title}</h3>
+                                    {/* Description */}
+                                    <p className="mt-2 text-gray-500">{step.description}</p>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Image Wrapper */}
+                        <Box
+                            sx={{
+                                position: "relative",
+                                width: "100%",  // Full width for responsiveness
+                                height: "500px",
+                                borderRadius: "10px",
+                                overflow: "hidden",
+                            }}
+                        >
+                            {/* Background Image */}
+                            <Image
+                                src={endImage} // Ensure the correct path
+                                alt="Service"
+                                layout="fill"
+                                className="object-cover"
+                            />
+
+                            {/* Frame Box (Stronger Pulse Effect) */}
+                            <Box
+                                sx={{
+                                    position: "absolute",
+                                    top: "50%",
+                                    left: "50%",
+                                    transform: "translate(-50%, -50%)",
+                                    width: "110px",
+                                    height: "110px",
+                                    border: "5px solid #FF3811",
+                                    borderRadius: "50%",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    backgroundColor: "rgba(0, 0, 0, 0.6)",
+                                    cursor: "pointer",
+                                    transition: "0.3s",
+                                    animation: "pulse 2s infinite ease-out", // Smoother & longer pulse
+                                    "&:hover": {
+                                        backgroundColor: "rgba(0, 0, 0, 0.8)",
+                                        transform: "translate(-50%, -50%) scale(1.1)", // Slight zoom on hover
+                                    },
+                                    "@keyframes pulse": {
+                                        "0%": { boxShadow: "0 0 0 0 rgba(255, 56, 17, 0.8)" },  // Stronger start
+                                        "50%": { boxShadow: "0 0 0 30px rgba(255, 56, 17, 0.2)" }, // Bigger spread
+                                        "100%": { boxShadow: "0 0 0 50px rgba(255, 56, 17, 0)" }, // Smooth fade-out
+                                    },
+                                }}
+                            >
+                                {/* Triangle Play Icon */}
+                                <Box
+                                    sx={{
+                                        width: 0,
+                                        height: 0,
+                                        borderLeft: "24px solid #FF3811", // Bigger Triangle color
+                                        borderTop: "14px solid transparent",
+                                        borderBottom: "14px solid transparent",
+                                        marginLeft: "5px", // Adjust for centering inside the circle
+                                    }}
+                                />
+                            </Box>
+
+                        </Box>
+
+
                     </div>
 
                     {/* Right Sidebar */}
@@ -134,17 +223,13 @@ export default async function ServiceDetailsPage({ params }) {
                                 backgroundColor: "#151515",
                                 padding: "50px 20px",
                                 borderRadius: "10px", // Rounded corners
-                                border: "2px solid #FF3811", // Red border
                                 marginTop: "30px",
                             }}
                         >
+                            <Image className="relative" src={logo} alt="Car Doctor" />
                             {/* Main Title */}
-                            <Typography variant="h2" sx={{ fontWeight: "bold", fontSize: "36px", color: "#151515" }}>
-                                Car Doctor
-                            </Typography>
-
                             {/* Subheading */}
-                            <Typography variant="h5" sx={{ marginTop: "10px", color: "#555" }}>
+                            <Typography className="  text-white" variant="h5" sx={{ marginTop: "10px", }}>
                                 Need Help? We Are Here To Help You
                             </Typography>
 
@@ -174,6 +259,32 @@ export default async function ServiceDetailsPage({ params }) {
                                 Get A Quote
                             </Button>
                         </Box>
+
+                        {/* Title */}
+                        <h2 className="text-4xl font-bold text-[#151515]  mt-8">Price ${price}</h2>
+
+                        <Button
+                            sx={{
+                                width: "364px",
+                                height: "56px",
+                                backgroundColor: "#FF3811",
+                                borderRadius: "5px",
+                                fontFamily: "Inter, sans-serif",
+                                fontWeight: 600,
+                                fontSize: "18px",
+                                lineHeight: "22px",
+                                color: "#FFFFFF",
+                                textTransform: "none",
+                                position: "absolute",
+                                marginTop: "30px",
+                                "&:hover": {
+                                    backgroundColor: "#d62f0b",
+                                },
+                            }}
+                        >
+                            Proceed Checkout
+                        </Button>
+
                     </div>
 
                 </div>

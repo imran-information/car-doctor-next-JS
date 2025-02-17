@@ -147,6 +147,10 @@ function NavBar() {
                             ))}
                         </Menu>
                     </Box>
+
+                    <Link href="/login">
+                        <Button>login </Button>
+                    </Link>
                 </Toolbar>
             </Container>
         </AppBar>
