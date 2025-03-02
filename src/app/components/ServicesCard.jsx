@@ -29,17 +29,17 @@ export default function ServicesCard({ service }) {
                     alt={title}
                     image={img}
                     sx={{
-                        height: 200,
+                        height: 250,
                         width: "100%",
                         objectFit: "cover",
                         padding: "15px",
                     }}
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h4" component="div">
+                    <Typography gutterBottom variant="h5" component="div">
                         {title}
                     </Typography>
-                    <Typography variant="h5" sx={{ color: "#FF3811" }}>
+                    <Typography variant="h6" sx={{ color: "#FF3811" }}>
                         Price: ${price}
                     </Typography>
                 </CardContent>

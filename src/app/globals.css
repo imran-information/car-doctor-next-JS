@@ -2,8 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+@media (min-width: 600px) {
+    .css-ik7aie-MuiContainer-root {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
 
 .overlay-bg {
-    background: rgb(0,0,0);
-background: linear-gradient(90deg, rgba(0,0,0,1) 48%, rgba(255,255,255,1) 86%);
+    background: rgb(0, 0, 0);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 1) 48%, rgba(255, 255, 255, 1) 86%);
 }

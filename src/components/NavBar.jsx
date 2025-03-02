@@ -1,4 +1,5 @@
-"use client";
+'use client';
+
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -15,8 +16,7 @@ import MenuItem from "@mui/material/MenuItem";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import SearchIcon from "@mui/icons-material/Search";
 import Image from "next/image";
-import { InputBase, Paper } from "@mui/material";
-import logo from "../../public/assets/logo.svg"; // Ensure the path is correct
+import logo from "../../public/assets/logo.svg";
 import Link from "next/link";
 
 const pages = ["Home", "About", "Services", "Blog", "Contact"];
@@ -32,13 +32,13 @@ function NavBar() {
     };
 
     return (
-        <AppBar className="border-b-2 border-b-[#FF3811] py-1" style={{ backgroundColor: "white" }} position="fixed">
-            <Container maxWidth="xl">
+        <AppBar className="border-b-2 border-b-[#FF3811] py-1  px-0 " style={{ backgroundColor: "white" }} position="fixed">
+            <div className="container mx-auto">
                 <Toolbar disableGutters>
                     {/* Logo for Desktop */}
                     <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center", mr: 2 }}>
                         <Link href={'/'}>
-                            <Image src={logo} alt="Logo" width={100} height={70} />
+                            <Image src={logo} alt="Logo" width={90} height={70} />
                         </Link>
                     </Box>
 
@@ -70,7 +70,7 @@ function NavBar() {
                     </Box>
 
                     {/* Navbar Links for Desktop */}
-                    <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex", justifyContent: "center" } }}>
+                    <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "center" }}>
                         {pages.map((page) => (
                             <Button key={page} sx={{ my: 2, color: "black", fontWeight: "700" }}>
                                 {page}
@@ -78,33 +78,15 @@ function NavBar() {
                         ))}
                     </Box>
 
-                    {/* Search Bar */}
-                    <Paper
-                        component="form"
-                        sx={{
-                            display: { xs: "none", md: "flex" },
-                            alignItems: "center",
-                            borderRadius: "12px",
-                            width: "268px",
-                            height: "56px",
-                            padding: "4px 8px",
-                            border: "1px solid #FF3811",
-                        }}
-                    >
+                    {/* Search and Shopping Icons for Desktop */}
+                    <div className="hidden md:flex items-center space-x-4">
                         <IconButton>
                             <ShoppingBagIcon />
                         </IconButton>
                         <IconButton>
                             <SearchIcon />
                         </IconButton>
-                        <InputBase
-                            className="w-44"
-                            sx={{ ml: 1, flex: 1 }}
-                            placeholder="Search..."
-                            value={searchText}
-                            onChange={(e) => setSearchText(e.target.value)}
-                        />
-                    </Paper>
+                    </div>
 
                     {/* Appointment Button */}
                     <Button
@@ -116,7 +98,7 @@ function NavBar() {
                             fontWeight: "bold",
                             padding: "6px 12px",
                             whiteSpace: "nowrap",
-                            marginLeft: "10px",
+                            marginLeft: "20px",
                         }}
                         onClick={handleSearch}
                     >
@@ -149,11 +131,11 @@ function NavBar() {
                     </Box>
 
                     <Link href="/login">
-                        <Button>login </Button>
+                        <Button>Login</Button>
                     </Link>
                 </Toolbar>
-            </Container>
-        </AppBar>
+            </div >
+        </AppBar >
     );
 }
 

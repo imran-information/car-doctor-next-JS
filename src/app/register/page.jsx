@@ -1,10 +1,10 @@
-import React from "react";
 import { Box, TextField, Button, Typography, Grid } from "@mui/material";
 import Image from "next/image";
 import registerImg from "../../../public/assets/images/login/login.svg";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import Link from "next/link";
 
 export default function RegisterPage() {
     return (
@@ -90,7 +90,7 @@ export default function RegisterPage() {
                     </Button>
 
                     <Typography variant="body2" align="center" sx={{ marginBottom: 2 }}>
-                        Already have an account? <a href="/login">Login</a>
+                        Already have an account? <Link className="text-[#FF3811] font-bold" href="/login">Login</Link>
                     </Typography>
 
                     {/* Social Login */}
