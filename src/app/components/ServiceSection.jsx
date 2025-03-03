@@ -1,13 +1,14 @@
-''
 import Heading from '@/components/shared/Heading';
 import React from 'react';
 import ServicesCard from './ServicesCard';
 import dbConnect, { collectionName } from '@/lib/dbConnect';
+import { Button, } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 
 
 export default async function ServiceSection() {
-    const servicesData = await dbConnect(collectionName.services).find().toArray();
+    const servicesData = await dbConnect(collectionName.services).find().limit(8).toArray();
 
 
     return (
@@ -19,6 +20,27 @@ export default async function ServiceSection() {
                 {
                     servicesData.map(service => <ServicesCard key={service._id} service={service} />)
                 }
+            </div>
+            <div className="flex justify-center">
+                <Button
+                    sx={{
+                        padding: "10px 20px",
+                        border: "2px solid #FF3811",
+                        color: "#FF3811",
+                        fontWeight: 700,
+                        borderRadius: "8px",
+                        textTransform: "uppercase",
+                        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
+                        "&:hover": {
+                            backgroundColor: "#FF3811",
+                            color: "white",
+                            boxShadow: "0 6px 12px rgba(0, 0, 0, 0.4)",
+                        },
+                    }}
+                    variant="outlined"
+                >
+                    More Services <ArrowForwardIcon sx={{ ml: 1 }} />
+                </Button>
             </div>
 
         </div>
