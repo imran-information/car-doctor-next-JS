@@ -5,6 +5,7 @@ import PopularProducts from "./components/PopularProducts";
 import ServiceSection from "./components/ServiceSection";
 import Slider from "./components/Slider";
 import TeamSection from "./components/TeamSection";
+import TestimonialSection from "./components/Testimonial";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <PopularProducts />
       <TeamSection />
       <CoreFeatures />
+      <TestimonialSection />
     </>
   );
 }
