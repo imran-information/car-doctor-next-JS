@@ -1,4 +1,5 @@
 import AboutUsSection from "./components/AboutUsSection";
+import CoreFeatures from "./components/CoreFeatures";
 import InfoSection from "./components/InfoSection";
 import PopularProducts from "./components/PopularProducts";
 import ServiceSection from "./components/ServiceSection";
@@ -14,6 +15,7 @@ export default function Home() {
       <InfoSection />
       <PopularProducts />
       <TeamSection />
+      <CoreFeatures />
     </>
   );
 }
