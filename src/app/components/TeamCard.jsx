@@ -11,18 +11,25 @@ export default function TeamCard({ team }) {
 
     return (
 
-        <Card
-            className="p-4 rounded-xl border border-gray-200 shadow-md  cursor-pointer"
+        <Card sx={{
+            maxWidth: 600,
+            transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
+            "&:hover": {
+                transform: "scale(1.05)",
+                boxShadow: 6,
+                cursor: "pointer",
+            },
+        }} className="  rounded-xl border border-gray-200 shadow-md  "
         >
             {/* Image Container */}
-            <div className="bg-gray-100 rounded-lg flex justify-center items-center overflow-hidden">
-                <CardMedia
-                    component="img"
-                    alt={name}
-                    image={image}
-                    className="h-48 w-48 object-cover p-4 transition-transform duration-300 hover:scale-110"
-                />
-            </div>
+
+            <CardMedia
+                component="img"
+                alt={name}
+                image={image}
+                className="h-48 w-48 object-cover  transition-transform duration-300 hover:scale-110"
+            />
+
 
             {/* Content */}
             <CardContent className="text-center space-y-2">
