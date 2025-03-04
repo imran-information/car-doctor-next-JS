@@ -34,7 +34,7 @@ export default async function PopularProducts() {
                     }}
                     variant="outlined"
                 >
-                    More Services <ArrowForwardIcon sx={{ ml: 1 }} />
+                    More Products <ArrowForwardIcon sx={{ ml: 1 }} />
                 </Button>
             </div>
         </div>

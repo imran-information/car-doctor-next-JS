@@ -13,7 +13,7 @@ export default function ProductsCard({ product }) {
 
     return (
         <Link href={`/products/${_id}`} passHref>
-            <Card
+            <Card className='p-3'
                 sx={{
                     maxWidth: 600,
                     transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
@@ -24,17 +24,19 @@ export default function ProductsCard({ product }) {
                     },
                 }}
             >
-                <CardMedia
-                    component="img"
-                    alt={title}
-                    image={img}
-                    sx={{
-                        height: 250,
-                        width: "100%",
-                        objectFit: "cover",
-                        padding: "15px",
-                    }}
-                />
+                <div className="bg-[#F3F3F3] rounded-md">
+                    <CardMedia className='mx-auto'
+                        component="img"
+                        alt={title}
+                        image={img}
+                        sx={{
+                            height: '200px',
+                            width: "50%",
+                            objectFit: "cover",
+                            padding: "15px",
+                        }}
+                    />
+                </div>
                 <CardContent className='text-center'>
                     <Typography gutterBottom >
                         {"⭐".repeat(rating)}
@@ -43,7 +45,7 @@ export default function ProductsCard({ product }) {
                         {productName}
                     </Typography>
                     <Typography variant="h6" sx={{ color: "#FF3811" }}>
-                        Price: ${price}
+                        ${price}
                     </Typography>
                 </CardContent>
 
