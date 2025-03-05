@@ -4,6 +4,7 @@ import Image from "next/image";
 import imgPerson from '../../../public/assets/images/about_us/person.jpg'
 import imgParts from '../../../public/assets/images/about_us/parts.jpg'
 import { Button } from "@mui/material";
+import Link from "next/link";
 
 export default function AboutUsSection() {
     return (
@@ -39,24 +40,26 @@ export default function AboutUsSection() {
                         content="The majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable."
                     />
                     <div className="text-center md:text-left">
-                        <Button
-                            sx={{
-                                backgroundColor: "#FF3811",
-                                marginTop: "20px",
-                                color: "white",
-                                fontWeight: 700,
-                                padding: "12px 30px",
-                                borderRadius: "50px",
-                                "&:hover": {
-                                    backgroundColor: "#d32f0f",
-                                },
-                                width: "fit-content",
-                                marginInline: "auto",
-                            }}
-                            variant="contained"
-                        >
-                            Get More Info
-                        </Button>
+                        <Link href='/'>
+                            <Button
+                                sx={{
+                                    backgroundColor: "#FF3811",
+                                    marginTop: "20px",
+                                    color: "white",
+                                    fontWeight: 700,
+                                    padding: "12px 30px",
+                                    borderRadius: "50px",
+                                    "&:hover": {
+                                        backgroundColor: "#d32f0f",
+                                    },
+                                    width: "fit-content",
+                                    marginInline: "auto",
+                                }}
+                                variant="contained"
+                            >
+                                Get More Info
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </div>

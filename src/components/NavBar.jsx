@@ -1,5 +1,6 @@
-'use client';
+"use client";
 import * as React from "react";
+import { usePathname } from "next/navigation";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -20,46 +21,33 @@ import Link from "next/link";
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function NavBar() {
+    const pathname = usePathname(); // Get the current route
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const [searchText, setSearchText] = React.useState("");
 
-    const handleSearch = () => {
-        console.log("Searching for:", searchText);
-    };
+    // Function to check if the link is active
+    const isActive = (href) => pathname === href;
 
-    const link = <div className="flex gap-5">
-        <Link
-            className="text-black font-medium relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full"
-            href="/"
-        >
-            Home
-        </Link>
-        <Link
-            className="text-black font-medium relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full"
-            href="/about"
-        >
-            About
-        </Link>
-        <Link
-            className="text-black font-medium relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full"
-            href="/services"
-        >
-            Services
-        </Link>
-        <Link
-            className="text-black font-medium relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full"
-            href="/products"
-        >
-            Products
-        </Link>
-        <Link
-            className="text-black font-medium relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full"
-            href="/contact"
-        >
-            Contact
-        </Link>
-    </div>
+    const link = (
+        <div className="flex gap-5">
+            {[
+                { href: "/", label: "Home" },
+                { href: "/about", label: "About" },
+                { href: "/services", label: "Services" },
+                { href: "/products", label: "Products" },
+                { href: "/contact", label: "Contact" },
+            ].map((item) => (
+                <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`font-medium relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full ${isActive(item.href) ? "text-[#FF3811] after:w-full" : "text-black"
+                        }`}
+                >
+                    {item.label}
+                </Link>
+            ))}
+        </div>
+    );
 
     return (
         <AppBar
@@ -94,38 +82,25 @@ function NavBar() {
                             open={Boolean(anchorElNav)}
                             onClose={() => setAnchorElNav(null)}
                         >
-                            <MenuItem onClick={() => setAnchorElNav(null)}>
-                                <Typography sx={{ textAlign: "center" }}>
-                                    <ul className="px-10">
-                                        <li className="my-2"> <Link className="text-black hover:text-[#FF3811]" href="/">
-                                            Home </Link>
-                                        </li>
-                                        <li className="my-2">
-                                            <Link className="text-black hover:text-[#FF3811]" href="/about">
-                                                About
-                                            </Link>
-                                        </li>
-                                        <li className="my-2">
-                                            <Link className="text-black hover:text-[#FF3811]" href="/services">
-                                                Services
-                                            </Link>
-                                        </li>
-                                        <li className="my-2">
-                                            <Link className="text-black hover:text-[#FF3811]" href="/products">
-                                                Products
-                                            </Link>
-                                        </li>
-                                        <li className="my-2">
-                                            <Link className="text-black hover:text-[#FF3811]" href="/contact">
-                                                Contact
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </Typography>
-                            </MenuItem>
+                            {[
+                                { href: "/", label: "Home" },
+                                { href: "/about", label: "About" },
+                                { href: "/services", label: "Services" },
+                                { href: "/products", label: "Products" },
+                                { href: "/contact", label: "Contact" },
+                            ].map((item) => (
+                                <MenuItem key={item.href} onClick={() => setAnchorElNav(null)}>
+                                    <Link
+                                        className={`text-black hover:text-[#FF3811] ${isActive(item.href) ? "text-[#FF3811]" : ""
+                                            }`}
+                                        href={item.href}
+                                    >
+                                        {item.label}
+                                    </Link>
+                                </MenuItem>
+                            ))}
                         </Menu>
                     </Box>
-
 
                     {/* Navbar Links for Desktop */}
                     <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "center" }}>
@@ -159,7 +134,6 @@ function NavBar() {
                                 borderColor: "#FF3811",
                             },
                         }}
-                        onClick={handleSearch}
                     >
                         Appointment
                     </Button>

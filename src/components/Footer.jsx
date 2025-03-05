@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function Footer() {
     return (
-        <footer className="bg-[#151515] py-12 sm:pt-20 ">
+        <footer className="bg-[#151515] pt-12 pb-3 sm:pt-20 ">
             <div className="container mx-auto p-5 xl:p-0">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8  justify-items-center lg:justify-items-end">
                     <div className="text-center lg:text-left">
@@ -27,10 +27,9 @@ export default function Footer() {
                         <h3 className="text-white text-xl font-semibold mb-4">About</h3>
                         <ul className="text-[#F3F3F3] space-y-2">
                             <li><Link href="/" className="text-sm relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full">Home</Link></li>
-                            <li><Link href="#" className="text-sm relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full">About</Link></li>
-                            <li><Link href="#" className="text-sm relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full">Services</Link></li>
-                            <li><Link href="#" className="text-sm relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full">Products</Link></li>
-                            <li><Link href="#" className="text-sm relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full">Contact</Link></li>
+                            <li><Link href="/services" className="text-sm relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full">Services</Link></li>
+                            <li><Link href="/products" className="text-sm relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full">Products</Link></li>
+                            <li><Link href="/contact" className="text-sm relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full">Contact</Link></li>
                         </ul>
                     </div>
 
@@ -38,7 +37,7 @@ export default function Footer() {
                     <div className="text-center md:text-left">
                         <h3 className="text-white text-xl font-semibold mb-4">Company</h3>
                         <ul className="text-[#F3F3F3] space-y-2">
-                            <li><a href="#" className="text-sm relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full">About Us</a></li>
+                            <li><a href="/about" className="text-sm relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full">About Us</a></li>
                             <li><a href="#" className="text-sm relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full">Careers</a></li>
                             <li><a href="#" className="text-sm relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full">Privacy Policy</a></li>
                             <li><a href="#" className="text-sm relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full">Terms of Service</a></li>

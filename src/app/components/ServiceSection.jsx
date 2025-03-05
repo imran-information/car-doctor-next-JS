@@ -4,6 +4,7 @@ import ServicesCard from './ServicesCard';
 import dbConnect, { collectionName } from '@/lib/dbConnect';
 import { Button, } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import Link from 'next/link';
 
 
 
@@ -22,25 +23,27 @@ export default async function ServiceSection() {
                 }
             </div>
             <div className="flex justify-center">
-                <Button
-                    sx={{
-                        padding: "10px 20px",
-                        border: "2px solid #FF3811",
-                        color: "#FF3811",
-                        fontWeight: 700,
-                        borderRadius: "8px",
-                        textTransform: "uppercase",
-                        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
-                        "&:hover": {
-                            backgroundColor: "#FF3811",
-                            color: "white",
-                            boxShadow: "0 6px 12px rgba(0, 0, 0, 0.4)",
-                        },
-                    }}
-                    variant="outlined"
-                >
-                    More Services <ArrowForwardIcon sx={{ ml: 1 }} />
-                </Button>
+                <Link href='/services'>
+                    <Button
+                        sx={{
+                            padding: "10px 20px",
+                            border: "2px solid #FF3811",
+                            color: "#FF3811",
+                            fontWeight: 700,
+                            borderRadius: "8px",
+                            textTransform: "uppercase",
+                            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
+                            "&:hover": {
+                                backgroundColor: "#FF3811",
+                                color: "white",
+                                boxShadow: "0 6px 12px rgba(0, 0, 0, 0.4)",
+                            },
+                        }}
+                        variant="outlined"
+                    >
+                        More Services <ArrowForwardIcon sx={{ ml: 1 }} />
+                    </Button>
+                </Link>
             </div>
 
         </div>
