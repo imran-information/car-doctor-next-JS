@@ -164,7 +164,20 @@ function NavBar() {
                     </Box>
 
                     <Link href="/login">
-                        <Button variant="contained" color="primary" sx={{ marginLeft: "20px" }}>
+                        <Button variant="contained" sx={{
+                            backgroundColor: "#FF3811",
+                            color: "white",
+                            fontWeight: 700,
+                            padding: "7px 20px",
+                            borderRadius: "8px",
+                            marginLeft: "20px",
+                            textTransform: "uppercase",
+                            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
+                            "&:hover": {
+                                backgroundColor: "#d32f0f",
+                                boxShadow: "0 6px 12px rgba(0, 0, 0, 0.4)",
+                            },
+                        }} >
                             Login
                         </Button>
                     </Link>

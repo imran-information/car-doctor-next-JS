@@ -1,9 +1,9 @@
 'use client';
-import { Container, Typography, Box, Grid, Button } from "@mui/material";
+import { Typography, Box, Grid, Button } from "@mui/material";
 import Image from "next/image";
 import Head from "next/head";
-import aboutImg1 from "../../../public/assets/images/about_us/parts.jpg";
-import aboutImg2 from "../../../public/assets/images/about_us/person.jpg";
+import aboutImg2 from "../../../public/assets/images/about_us/parts.jpg";
+import aboutImg1 from "../../../public/assets/images/about_us/person.jpg";
 
 export default function About() {
     return (
@@ -13,7 +13,7 @@ export default function About() {
                 <meta name="description" content="Learn more about Car Doctor, your trusted auto repair service." />
             </Head>
 
-            <div className="pt-32 p-5 xl:p-0 min-h-screen container mx-auto">
+            <div className="pt-32 px-5 xl:px-0 min-h-screen container mx-auto">
                 {/* Section 1 */}
                 <Grid container spacing={6} alignItems="center" className="mb-10">
                     {/* Text Content */}
@@ -49,7 +49,7 @@ export default function About() {
                 </Grid>
 
                 {/* Section 2 */}
-                <Grid container spacing={6} alignItems="center" className="mt-16 flex-row-reverse">
+                <Grid container spacing={6} alignItems="center" className="mt-16 flex-row-reverse mb-10">
                     {/* Image */}
                     <Grid item xs={12} md={6}>
                         <Box position="relative" width="100%" height={400}>
