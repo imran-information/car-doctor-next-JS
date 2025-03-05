@@ -5,6 +5,7 @@ export const collectionName = {
     services: "services",
     products: "products",
     teams: "teams",
+    userCollection: "userCollection",
 }
 
 export default function dbConnect(collectionName) {

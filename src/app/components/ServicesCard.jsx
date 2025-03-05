@@ -44,8 +44,8 @@ export default function ServicesCard({ service }) {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button sx={{ fontWeight: 700 }} size="medium">
-                        Learn More <ArrowForwardIcon sx={{ ml: 1 }} />
+                    <Button sx={{ fontWeight: 700 , backgroundColor:'#FF3811'}} size="medium">
+                         <ArrowForwardIcon sx={{color:'white' }} />
                     </Button>
                 </CardActions>
             </Card>
