@@ -11,7 +11,7 @@ export default function CoreFeatures() {
     ];
 
     return (
-        <div className="container mx-auto my-24">
+        <div className="container mx-auto my-24 p-5 xl:p-0">
             <Heading
                 center
                 max

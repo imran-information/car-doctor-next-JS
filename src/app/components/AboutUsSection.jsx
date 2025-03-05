@@ -7,7 +7,7 @@ import { Button } from "@mui/material";
 
 export default function AboutUsSection() {
     return (
-        <div className="container mx-auto my-24   ">
+        <div className="container mx-auto my-24  p-5 xl:p-0 ">
             <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-center  ">
                 {/* Left Section: Image */}
                 <div className="relative flex-1 ">

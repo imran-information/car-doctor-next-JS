@@ -28,46 +28,42 @@ function NavBar() {
         console.log("Searching for:", searchText);
     };
 
-    const link = (
-        <div className="flex gap-5">
-            <Link
-                className="text-black relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] hover:text-[#FF3811] hover:after:w-full transition-all duration-500 ease-in-out"
-                href="/"
-            >
-                Home
-            </Link>
-            <Link
-                className="text-black relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] hover:text-[#FF3811] hover:after:w-full transition-all duration-500 ease-in-out"
-                href="/about"
-            >
-                About
-            </Link>
-            <Link
-                className="text-black relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] hover:text-[#FF3811] hover:after:w-full transition-all duration-500 ease-in-out"
-                href="/services"
-            >
-                Services
-            </Link>
-            <Link
-                className="text-black relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] hover:text-[#FF3811] hover:after:w-full transition-all duration-500 ease-in-out"
-                href="/products"
-            >
-                Products
-            </Link>
-            <Link
-                className="text-black relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] hover:text-[#FF3811] hover:after:w-full transition-all duration-500 ease-in-out"
-                href="/contact"
-            >
-                Contact
-            </Link>
-        </div>
-
-
-    );
+    const link = <div className="flex gap-5">
+        <Link
+            className="text-black font-medium relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full"
+            href="/"
+        >
+            Home
+        </Link>
+        <Link
+            className="text-black font-medium relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full"
+            href="/about"
+        >
+            About
+        </Link>
+        <Link
+            className="text-black font-medium relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full"
+            href="/services"
+        >
+            Services
+        </Link>
+        <Link
+            className="text-black font-medium relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full"
+            href="/products"
+        >
+            Products
+        </Link>
+        <Link
+            className="text-black font-medium relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-[#FF3811] after:transition-all after:duration-500 after:ease-in-out hover:text-[#FF3811] hover:after:w-full"
+            href="/contact"
+        >
+            Contact
+        </Link>
+    </div>
 
     return (
         <AppBar
-            className="border-b-2 border-b-[#FF3811] py-3 px-4"
+            className="border-b-2 border-b-[#FF3811] py-2 px-4"
             style={{ backgroundColor: "white" }}
             position="fixed"
         >

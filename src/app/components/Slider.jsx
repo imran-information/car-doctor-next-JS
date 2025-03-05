@@ -72,13 +72,11 @@ export default function ImageSlider() {
                                 bottom: "20px",
                                 backgroundColor: "rgba(0, 0, 0, 0.6)", // Softer overlay
                                 padding: { xs: "20px", sm: "40px 60px" },
-                                borderRadius: "10px", // Rounded corners on the overlay box
-                                width: "100%",
-                                maxWidth: "60%",
+                                borderRadius: "10px",
+                                width: { xs: "90%", md: "100%", lg: "60%" }, // Full width on md, default on lg
                                 left: "50%",
                                 transform: "translateX(-50%)",
                                 textAlign: "center",
-
                             }}
                         >
                             <Typography
@@ -90,7 +88,7 @@ export default function ImageSlider() {
                                     fontSize: { xs: "2rem", sm: "3rem" },
                                     textTransform: "uppercase",
                                     letterSpacing: "2px",
-                                    textShadow: "2px 2px 5px rgba(0,0,0,0.8)", // Text shadow for better visibility
+                                    textShadow: "2px 2px 5px rgba(0,0,0,0.8)",
                                 }}
                             >
                                 {slide.text}
@@ -147,6 +145,7 @@ export default function ImageSlider() {
                                 </Button>
                             </Box>
                         </Box>
+
                     </Box>
                 ))}
             </Slider>

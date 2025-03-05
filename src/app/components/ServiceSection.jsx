@@ -12,7 +12,7 @@ export default async function ServiceSection() {
 
 
     return (
-        <div className='container mx-auto mb-24 xl:mt-40'>
+        <div className='container mx-auto mb-24 xl:mt-40 p-5 xl:p-0'>
 
             <Heading center max content={"The majority have suffered alteration in some form, by injected humour, or randomized words which don't look even slightly believable. "} title={'Our Service Area'} subTitle={'Service'} />
 

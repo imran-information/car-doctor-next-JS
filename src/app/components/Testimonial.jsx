@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaStar, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Heading from "@/components/shared/Heading";
@@ -38,44 +38,42 @@ const testimonials = [
     },
 ];
 
-
 export default function TestimonialSection() {
     const [startIndex, setStartIndex] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);
     const itemsPerPage = 3;
+    const intervalTime = 4000; // Auto-slide every 4 seconds
 
     const nextTestimonial = () => {
-        if (isTransitioning) return; // Prevent rapid clicking
+        if (isTransitioning) return;
         setIsTransitioning(true);
 
-        setStartIndex((prevIndex) => {
-            const nextIndex =
-                prevIndex + itemsPerPage >= testimonials.length ? 0 : prevIndex + 1;
-            return nextIndex;
-        });
-
         setTimeout(() => {
+            setStartIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
             setIsTransitioning(false);
-        }, 600); // Adjust the timeout to match the transition duration
+        }, 600); // Adjust timing to match transition duration
     };
 
     const prevTestimonial = () => {
-        if (isTransitioning) return; // Prevent rapid clicking
+        if (isTransitioning) return;
         setIsTransitioning(true);
 
-        setStartIndex((prevIndex) => {
-            const prevIndexVal =
-                prevIndex === 0 ? testimonials.length - itemsPerPage : prevIndex - 1;
-            return prevIndexVal;
-        });
-
         setTimeout(() => {
+            setStartIndex((prevIndex) =>
+                prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
+            );
             setIsTransitioning(false);
-        }, 600); // Adjust the timeout to match the transition duration
+        }, 600);
     };
 
+    // Auto-slide effect with infinite loop
+    useEffect(() => {
+        const interval = setInterval(nextTestimonial, intervalTime);
+        return () => clearInterval(interval); // Cleanup interval on unmount
+    }, [startIndex]); // Runs whenever startIndex changes
+
     return (
-        <div className="container mx-auto my-24">
+        <div className="container mx-auto my-24 p-5 xl:p-0">
             <Heading
                 center
                 max
@@ -86,51 +84,54 @@ export default function TestimonialSection() {
 
             {/* Testimonial Cards */}
             <div
-                className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 transition-all duration-700 ease-out transform ${isTransitioning ? "opacity-0" : "opacity-100"
+                className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 transition-transform duration-700 ease-in-out ${isTransitioning ? "opacity-50" : "opacity-100"
                     }`}
                 style={{
                     transform: isTransitioning ? "translateX(-20px)" : "translateX(0)",
                 }}
             >
-                {testimonials.slice(startIndex, startIndex + itemsPerPage).map((testimonial, index) => (
-                    <div
-                        key={index}
-                        className="relative bg-white border border-gray-200 rounded-xl p-6 shadow-lg transition-all duration-700 ease-out transform"
-                    >
-                        {/* User Info */}
-                        <div className="flex items-center space-x-4">
-                            <Image
-                                src={testimonial.img}
-                                alt={testimonial.name}
-                                width={60}
-                                height={60}
-                                className="rounded-full"
-                            />
-                            <div>
-                                <h3 className="text-xl font-bold text-gray-800">{testimonial.name}</h3>
-                                <p className="text-lg text-gray-600">{testimonial.category}</p>
+                {testimonials
+                    .concat(testimonials) // Duplicate array for infinite effect
+                    .slice(startIndex, startIndex + itemsPerPage)
+                    .map((testimonial, index) => (
+                        <div
+                            key={index}
+                            className="relative bg-white border border-gray-200 rounded-xl p-6 shadow-lg transition-all duration-700 ease-out transform"
+                        >
+                            {/* User Info */}
+                            <div className="flex items-center space-x-4">
+                                <Image
+                                    src={testimonial.img}
+                                    alt={testimonial.name}
+                                    width={60}
+                                    height={60}
+                                    className="rounded-full"
+                                />
+                                <div>
+                                    <h3 className="text-xl font-bold text-gray-800">{testimonial.name}</h3>
+                                    <p className="text-lg text-gray-600">{testimonial.category}</p>
+                                </div>
+                            </div>
+
+                            {/* Testimonial Text */}
+                            <p className="mt-6 text-gray-600 text-lg leading-7">{testimonial.review}</p>
+
+                            {/* Star Ratings */}
+                            <div className="flex space-x-1 mt-6">
+                                {[...Array(5)].map((_, i) => (
+                                    <FaStar key={i} className="text-[#FF912C] text-xl" />
+                                ))}
+                            </div>
+
+                            {/* Quote Icon */}
+                            <div className="absolute top-6 right-6 w-14 h-14 bg-red-100 flex items-center justify-center rounded-full">
+                                <Image src="/assets/icons/quote.svg" alt="Quote" width={28} height={28} />
                             </div>
                         </div>
-
-                        {/* Testimonial Text */}
-                        <p className="mt-6 text-gray-600 text-lg leading-7">{testimonial.review}</p>
-
-                        {/* Star Ratings */}
-                        <div className="flex space-x-1 mt-6">
-                            {[...Array(5)].map((_, i) => (
-                                <FaStar key={i} className="text-[#FF912C] text-xl" />
-                            ))}
-                        </div>
-
-                        {/* Quote Icon */}
-                        <div className="absolute top-6 right-6 w-14 h-14 bg-red-100 flex items-center justify-center rounded-full">
-                            <Image src="/assets/icons/quote.svg" alt="Quote" width={28} height={28} />
-                        </div>
-                    </div>
-                ))}
+                    ))}
             </div>
 
-            {/* Navigation Buttons (Centered) */}
+            {/* Navigation Buttons */}
             <div className="flex justify-center space-x-6 mt-8">
                 <button
                     onClick={prevTestimonial}

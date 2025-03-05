@@ -9,7 +9,7 @@ export default async function PopularProducts() {
     const productsData = await dbConnect(collectionName.products).find().limit(8).toArray();
 
     return (
-        <div className="container mx-auto mb-24">
+        <div className="container mx-auto mb-24 p-5 xl:p-0">
             <Heading center content={"The majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. "} max title={"Browse Our Products"} subTitle={`Popular Products`} />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-10  ">
                 {
