@@ -7,18 +7,32 @@ import GoogleIcon from "@mui/icons-material/Google";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
     const [showPassword, setShowPassword] = useState(false);
-
     const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
-
+    const router = useRouter()
     const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        signIn("credentials", { email, password })
+        try {
+            const res = await signIn("credentials", { email, password, callbackUrl: '/', redirect: false })
+
+            if (res.ok) {
+                router.push("/")
+
+            } else {
+                console.log(error);
+                alert("AUthentication Failed")
+            }
+
+        } catch (error) {
+            console.log(error);
+            alert("AUthentication Failed")
+        }
     }
 
     return (
