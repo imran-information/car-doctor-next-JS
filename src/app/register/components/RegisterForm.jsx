@@ -7,6 +7,8 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import React, { useState } from "react";
 import { Box, TextField, Button, Typography, Grid, IconButton, InputAdornment } from "@mui/material";
 import { registerUser } from "@/app/actions/auth/registerUser";
+import SocialLogin from "@/app/login/components/SocialLogin";
+import { toast } from "material-react-toastify";
 
 const RegisterForm = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -25,26 +27,26 @@ const RegisterForm = () => {
 
         // Validate required fields
         if (!name || !email || !password || !confirmPassword) {
-            console.error("All fields are required!");
+            toast.error("All fields are required!");
             return;
         }
 
         // Validate email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            console.error("Invalid email format!");
+            toast.error("Invalid email format!");
             return;
         }
 
         // Validate password length
         if (password.length < 6) {
-            console.error("Password must be at least 6 characters long!");
+            toast.error("Password must be at least 6 characters long!");
             return;
         }
 
         // Validate password match
         if (password !== confirmPassword) {
-            console.error("Passwords do not match!");
+            toast.error("Passwords do not match!");
             return;
         }
 
@@ -172,23 +174,7 @@ const RegisterForm = () => {
                 Or Sign Up with
             </Typography>
 
-            <Grid container spacing={2} justifyContent="center">
-                <Grid item>
-                    <Button variant="outlined" sx={{ minWidth: 55, minHeight: 55, borderRadius: "50%", borderColor: "#FF3811", backgroundColor: "#F5F5F8" }}>
-                        <FacebookIcon sx={{ color: "#3B5998" }} />
-                    </Button>
-                </Grid>
-                <Grid item>
-                    <Button variant="outlined" sx={{ minWidth: 55, minHeight: 55, borderRadius: "50%", borderColor: "#FF3811", backgroundColor: "#F5F5F8" }}>
-                        <GoogleIcon sx={{ color: "#DB4437" }} />
-                    </Button>
-                </Grid>
-                <Grid item>
-                    <Button variant="outlined" sx={{ minWidth: 55, minHeight: 55, borderRadius: "50%", borderColor: "#FF3811", backgroundColor: "#F5F5F8" }}>
-                        <LinkedInIcon sx={{ color: "#0A66C2" }} />
-                    </Button>
-                </Grid>
-            </Grid>
+            <SocialLogin />
         </Box>
     );
 };

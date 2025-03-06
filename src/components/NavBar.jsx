@@ -17,14 +17,17 @@ import SearchIcon from "@mui/icons-material/Search";
 import Image from "next/image";
 import logo from "../../public/assets/logo.svg";
 import Link from "next/link";
+import { signOut, useSession } from "next-auth/react";
+import { toast } from "material-react-toastify";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function NavBar() {
+    const { data: session, status, } = useSession()
     const pathname = usePathname(); // Get the current route
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+    console.log(session);
     // Function to check if the link is active
     const isActive = (href) => pathname === href;
 
@@ -48,6 +51,17 @@ function NavBar() {
             ))}
         </div>
     );
+
+    const handleLogout = async () => {
+        try {
+            toast.info("Logging out...");
+            await signOut();
+            toast.success("User logged out successfully!");
+        } catch (error) {
+            toast.error(`Logout failed: ${error.message}`);
+        }
+        setAnchorElUser(null);
+    };
 
     return (
         <AppBar
@@ -117,70 +131,79 @@ function NavBar() {
                         </IconButton>
                     </div>
 
-                    {/* Appointment Button */}
-                    <Button
-                        variant="outlined"
-                        sx={{
-                            borderColor: "#FF3811",
-                            color: "#FF3811",
-                            borderRadius: "3px",
-                            fontWeight: "bold",
-                            padding: "6px 12px",
-                            whiteSpace: "nowrap",
-                            marginLeft: "20px",
-                            "&:hover": {
-                                backgroundColor: "#FF3811",
-                                color: "white",
-                                borderColor: "#FF3811",
-                            },
-                        }}
-                    >
-                        Appointment
-                    </Button>
+                    {
+                        status == 'authenticated' ? <>
+                            {/* Appointment Button */}
+                            <Button
+                                variant="outlined"
+                                sx={{
+                                    borderColor: "#FF3811",
+                                    color: "#FF3811",
+                                    borderRadius: "3px",
+                                    fontWeight: "bold",
+                                    padding: "6px 12px",
+                                    whiteSpace: "nowrap",
+                                    marginLeft: "20px",
+                                    "&:hover": {
+                                        backgroundColor: "#FF3811",
+                                        color: "white",
+                                        borderColor: "#FF3811",
+                                    },
+                                }}
+                            >
+                                Appointment
+                            </Button>
 
-                    {/* Profile Avatar */}
-                    <Box sx={{ flexGrow: 0, ml: 2 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={(e) => setAnchorElUser(e.currentTarget)} sx={{ p: 0 }}>
-                                <Avatar alt="User Profile" src="/static/images/avatar/2.jpg" />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: "45px" }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                            keepMounted
-                            transformOrigin={{ vertical: "top", horizontal: "right" }}
-                            open={Boolean(anchorElUser)}
-                            onClose={() => setAnchorElUser(null)}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={() => setAnchorElUser(null)}>
-                                    <Typography sx={{ textAlign: "center" }}>{setting}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
+                            {/* Profile Avatar */}
+                            <Box sx={{ flexGrow: 0, ml: 2 }}>
+                                <Tooltip title="Open settings">
+                                    <IconButton onClick={(e) => setAnchorElUser(e.currentTarget)} sx={{ p: 0 }}>
+                                        <Avatar alt="User Profile" src={session?.user?.image} />
+                                    </IconButton>
+                                </Tooltip>
+                                <Menu
+                                    sx={{ mt: "45px" }}
+                                    id="menu-appbar"
+                                    anchorEl={anchorElUser}
+                                    anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                                    keepMounted
+                                    transformOrigin={{ vertical: "top", horizontal: "right" }}
+                                    open={Boolean(anchorElUser)}
+                                    onClose={() => setAnchorElUser(null)}
+                                >
+                                    {settings.map((setting) => (
+                                        <MenuItem
+                                            key={setting}
+                                            onClick={setting === "Logout" ? handleLogout : () => setAnchorElUser(null)}
+                                        >
+                                            <Typography sx={{ textAlign: "center" }}>{setting}</Typography>
+                                        </MenuItem>
+                                    ))}
+                                </Menu>
+                            </Box>
+                        </> : <>
+                            <Link href="/login">
+                                <Button variant="contained" sx={{
+                                    backgroundColor: "#FF3811",
+                                    color: "white",
+                                    fontWeight: 700,
+                                    padding: "7px 20px",
+                                    borderRadius: "8px",
+                                    marginLeft: "20px",
+                                    textTransform: "uppercase",
+                                    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
+                                    "&:hover": {
+                                        backgroundColor: "#d32f0f",
+                                        boxShadow: "0 6px 12px rgba(0, 0, 0, 0.4)",
+                                    },
+                                }} >
+                                    Login
+                                </Button>
+                            </Link>
+                        </>
+                    }
 
-                    <Link href="/login">
-                        <Button variant="contained" sx={{
-                            backgroundColor: "#FF3811",
-                            color: "white",
-                            fontWeight: 700,
-                            padding: "7px 20px",
-                            borderRadius: "8px",
-                            marginLeft: "20px",
-                            textTransform: "uppercase",
-                            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
-                            "&:hover": {
-                                backgroundColor: "#d32f0f",
-                                boxShadow: "0 6px 12px rgba(0, 0, 0, 0.4)",
-                            },
-                        }} >
-                            Login
-                        </Button>
-                    </Link>
+
                 </Toolbar>
             </div>
         </AppBar>

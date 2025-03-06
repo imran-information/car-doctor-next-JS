@@ -1,13 +1,12 @@
 "use client"
-import { Box, Button, Grid, IconButton, InputAdornment, TextField, Typography } from "@mui/material";
+import { Box, Button, IconButton, InputAdornment, TextField, Typography } from "@mui/material";
 import { signIn } from "next-auth/react"
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import GoogleIcon from "@mui/icons-material/Google";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "material-react-toastify";
+import SocialLogin from "./SocialLogin";
 
 export default function LoginForm() {
     const [showPassword, setShowPassword] = useState(false);
@@ -18,20 +17,22 @@ export default function LoginForm() {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
+        toast.success('Submitting....');
         try {
             const res = await signIn("credentials", { email, password, callbackUrl: '/', redirect: false })
 
             if (res.ok) {
+                toast.success('Login Successfully.');
                 router.push("/")
 
             } else {
                 console.log(error);
-                alert("AUthentication Failed")
+                toast.error('AUthentication Failed');
             }
 
         } catch (error) {
             console.log(error);
-            alert("AUthentication Failed")
+            toast.error('AUthentication Failed');
         }
     }
 
@@ -123,23 +124,7 @@ export default function LoginForm() {
                     </Typography>
 
                     {/* Social Login */}
-                    <Grid container spacing={2} justifyContent="center">
-                        <Grid item>
-                            <Button variant="outlined" sx={{ minWidth: 55, minHeight: 55, borderRadius: "50%", borderColor: "#FF3811", backgroundColor: "#F5F5F8" }}>
-                                <FacebookIcon sx={{ color: "#3B5998" }} />
-                            </Button>
-                        </Grid>
-                        <Grid item>
-                            <Button variant="outlined" sx={{ minWidth: 55, minHeight: 55, borderRadius: "50%", borderColor: "#FF3811", backgroundColor: "#F5F5F8" }}>
-                                <GoogleIcon sx={{ color: "#DB4437" }} />
-                            </Button>
-                        </Grid>
-                        <Grid item>
-                            <Button variant="outlined" sx={{ minWidth: 55, minHeight: 55, borderRadius: "50%", borderColor: "#FF3811", backgroundColor: "#F5F5F8" }}>
-                                <LinkedInIcon sx={{ color: "#0A66C2" }} />
-                            </Button>
-                        </Grid>
-                    </Grid>
+                    <SocialLogin />
                 </Box>
             </form>
         </Box>
