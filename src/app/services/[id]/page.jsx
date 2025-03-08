@@ -1,10 +1,11 @@
 import Image from "next/image";
-import checkoutImage from "../../../../public/assets/images/checkout/checkout.png";
 import logo from "../../../../public/assets/logo-re.png";
 import endImage from "../../../../public/assets/images/checkout/2.jpg";
 import DownloadIcon from "@mui/icons-material/Download";
 import DescriptionIcon from "@mui/icons-material/Description";
 import { Box, Button, Typography } from "@mui/material";
+import Link from "next/link";
+import TopBanner from "@/components/shared/TopBanner";
 
 export default async function ServiceDetailsPage({ params }) {
     const serviceId = await params.id;
@@ -25,31 +26,9 @@ export default async function ServiceDetailsPage({ params }) {
         { number: "03", title: "STEP THREE", description: "It Uses A Dictionary Of Over 200." }
     ];
     return (
-        <div className="w-4/5 mx-auto my-32 mb-0 overflow-x-hidden">
+        <div className="container mx-auto my-32 mb-0 overflow-x-hidden">
             {/* Service Top Banner Section */}
-            <section>
-                <figure className="relative w-full h-[350px] rounded-lg overflow-hidden">
-                    {/* Background Image */}
-                    <Image src={checkoutImage} alt="Service Details" className="object-cover" fill />
-
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#151515] to-transparent rounded-lg"></div>
-
-                    {/* Text Overlay */}
-                    <div className="absolute top-[40%] left-10 md:left-20">
-                        <h3 className="text-3xl md:text-5xl font-bold text-white">Service Details</h3>
-                    </div>
-
-                    {/* Red Banner */}
-                    <div className="absolute bottom-0 left-0 w-full flex justify-center">
-                        <h4
-                            className="text-white font-medium text-xl bg-[#FF3811] py-3 px-10 rounded-[10px_100px_0px_100px/120px_100px_0px_100px]"
-                        >
-                            Home / Service Details
-                        </h4>
-                    </div>
-                </figure>
-            </section>
+            <TopBanner pageName={"Service Details"} pageContent={"Service Details"} />
 
             {/* Service Details Section */}
             <section className="my-10">
@@ -263,28 +242,29 @@ export default async function ServiceDetailsPage({ params }) {
                         {/* Title */}
                         <h2 className="text-4xl font-bold text-[#151515]  mt-8">Price ${price}</h2>
 
-                        <Button
-                            sx={{
-                                width: "364px",
-                                height: "56px",
-                                backgroundColor: "#FF3811",
-                                borderRadius: "5px",
-                                fontFamily: "Inter, sans-serif",
-                                fontWeight: 600,
-                                fontSize: "18px",
-                                lineHeight: "22px",
-                                color: "#FFFFFF",
-                                textTransform: "none",
-                                position: "absolute",
-                                marginTop: "30px",
-                                "&:hover": {
-                                    backgroundColor: "#d62f0b",
-                                },
-                            }}
-                        >
-                            Proceed Checkout
-                        </Button>
-
+                        <Link href={`/checkout/${_id}`}>
+                            <Button
+                                sx={{
+                                    width: "364px",
+                                    height: "56px",
+                                    backgroundColor: "#FF3811",
+                                    borderRadius: "5px",
+                                    fontFamily: "Inter, sans-serif",
+                                    fontWeight: 600,
+                                    fontSize: "18px",
+                                    lineHeight: "22px",
+                                    color: "#FFFFFF",
+                                    textTransform: "none",
+                                    position: "absolute",
+                                    marginTop: "30px",
+                                    "&:hover": {
+                                        backgroundColor: "#d62f0b",
+                                    },
+                                }}
+                            >
+                                Proceed Checkout
+                            </Button>
+                        </Link>
                     </div>
 
                 </div>
