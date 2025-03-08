@@ -38,6 +38,8 @@ function NavBar() {
                 { href: "/about", label: "About" },
                 { href: "/services", label: "Services" },
                 { href: "/products", label: "Products" },
+                { href: "/myBookings", label: "My Bookings" },
+                // session ? { href: "/myBookings", label: "My Bookings" } : '',
                 { href: "/contact", label: "Contact" },
             ].map((item) => (
                 <Link

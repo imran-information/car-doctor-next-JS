@@ -5,86 +5,39 @@ import { useSession } from "next-auth/react";
 import { toast } from "material-react-toastify";
 import { useRouter } from "next/navigation";
 
-const OrderForm = ({ serviceData }) => {
+const BookingUpdateForm = ({ bookingData }) => {
     const { data: session } = useSession();
-    const router = useRouter()
-    const [formData, setFormData] = useState({
-        customerName: session?.user?.name,
-        price: serviceData?.price || "",
-        phone: "",
-        email: session?.user?.email,
-        message: "",
-        address: "",
-        date: new Date().toISOString().split("T")[0],
-        serviceId: serviceData._id,
-        serviceName: serviceData.title,
-        serviceImg: serviceData.img,
-    });
-
-    useEffect(() => {
-        if (session) {
-            setFormData((prev) => ({
-                ...prev,
-                customerName: session?.user?.name || "",
-                email: session?.user?.email || "",
-            }));
-        }
-    }, [session]);
-
-    const [errors, setErrors] = useState({});
-
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const validateForm = () => {
-        let newErrors = {};
-        if (!formData.customerName.trim()) newErrors.customerName = "Name is required.";
-        if (!formData.price.toString().trim()) newErrors.price = "Price is required.";
-        if (!formData.phone.trim()) {
-            newErrors.phone = "Phone number is required.";
-        } else if (!/^\+?(\d[\d-.()\s]*){7,15}$/.test(formData.phone)) {
-            newErrors.phone = "Enter a valid phone number (7-15 digits).";
-        }
-        if (!formData.email.trim()) {
-            newErrors.email = "Email is required.";
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-            newErrors.email = "Enter a valid email address.";
-        }
-        if (!formData.address.trim()) newErrors.address = "Address is required.";
-        if (!formData.date.trim()) newErrors.date = "Date is required.";
-        if (!formData.message.trim()) newErrors.message = "Message is required.";
-
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
+    const router = useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (validateForm()) {
-            toast.info("Order submitting....!");
-            setFormData({
-                customerName: session?.user?.name || "",
-                price: serviceData?.price || "",
-                phone: "",
-                email: session?.user?.email || "",
-                message: "",
-                address: "",
-                date: new Date().toISOString().split("T")[0], // Reset date to today
-            });
-
-            const response = await fetch("http://localhost:3000/api/service", {
-                method: "POST",
-                body: JSON.stringify(formData),
-            });
-
-            const postedData = await response.json();
-            if (postedData.insertedId) {
-                toast.success("Order Confirmed.!");
-                router.push("/myBookings")
-            }
-            setErrors({});
+        toast.info("Updating booking..."); 
+        const formData = {
+            customerName: session?.user?.name,
+            email: session?.user?.email,
+            price: bookingData?.price,
+            phone: "",
+            message: "",
+            address: "",
+            date: bookingData?.date || new Date().toISOString().split("T")[0],
         }
+        
+        const response = await fetch(`/api/bookings/${bookingData._id}`, {
+            method: "PUT",
+            body: JSON.stringify(formData),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        const updatedData = await response.json();
+        if (updatedData.success) {
+            toast.success("Booking updated successfully!");
+            router.push("/myBookings");
+        } else {
+            toast.error("Error updating booking.");
+        }
+
     };
 
     return (
@@ -223,7 +176,6 @@ const OrderForm = ({ serviceData }) => {
                         />
                     </Grid>
 
-
                     {/* Message */}
                     <Grid item xs={12}>
                         <TextField
@@ -251,7 +203,7 @@ const OrderForm = ({ serviceData }) => {
                 {/* Submit Button */}
                 <Box textAlign="center" mt={3}>
                     <Button type="submit" variant="contained" sx={{ width: "100%", backgroundColor: "#FF3811" }}>
-                        Confirm Order
+                        Update Booking
                     </Button>
                 </Box>
             </Box>
@@ -259,4 +211,4 @@ const OrderForm = ({ serviceData }) => {
     );
 };
 
-export default OrderForm;
+export default BookingUpdateForm;

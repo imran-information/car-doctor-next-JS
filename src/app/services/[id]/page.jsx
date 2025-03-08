@@ -8,7 +8,7 @@ import Link from "next/link";
 import TopBanner from "@/components/shared/TopBanner";
 
 export default async function ServiceDetailsPage({ params }) {
-    const serviceId = await params.id;
+    const serviceId = await params?.id;
     const response = await fetch(`http://localhost:3000/api/service/${serviceId}`)
     const serviceData = await response.json()
 
