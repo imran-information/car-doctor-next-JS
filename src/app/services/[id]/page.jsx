@@ -2,15 +2,15 @@ import Image from "next/image";
 import checkoutImage from "../../../../public/assets/images/checkout/checkout.png";
 import logo from "../../../../public/assets/logo-re.png";
 import endImage from "../../../../public/assets/images/checkout/2.jpg";
-import dbConnect, { collectionName } from "@/lib/dbConnect";
 import DownloadIcon from "@mui/icons-material/Download";
 import DescriptionIcon from "@mui/icons-material/Description";
-import { ObjectId } from "mongodb";
 import { Box, Button, Typography } from "@mui/material";
 
 export default async function ServiceDetailsPage({ params }) {
     const serviceId = await params.id;
-    const serviceData = await dbConnect(collectionName.services).findOne({ _id: new ObjectId(serviceId) });
+    const response = await fetch(`http://localhost:3000/api/service/${serviceId}`)
+    const serviceData = await response.json()
+
     const { title, img, price, _id, description, facility } = serviceData;
     const services = [
         { name: "Full Car Repair", active: true },
@@ -226,7 +226,7 @@ export default async function ServiceDetailsPage({ params }) {
                                 marginTop: "30px",
                             }}
                         >
-                            <Image className="relative" src={logo} alt="Car Doctor" />
+                            <Image className="relative mx-auto" src={logo} alt="Car Doctor" />
                             {/* Main Title */}
                             {/* Subheading */}
                             <Typography className="  text-white" variant="h5" sx={{ marginTop: "10px", }}>
