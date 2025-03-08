@@ -158,7 +158,8 @@ function NavBar() {
                             <Box sx={{ flexGrow: 0, ml: 2 }}>
                                 <Tooltip title="Open settings">
                                     <IconButton onClick={(e) => setAnchorElUser(e.currentTarget)} sx={{ p: 0 }}>
-                                        <Avatar alt="User Profile" src={session?.user?.image} />
+                                        <Avatar alt="User Profile" src={session?.user?.image} sx={{ width: 40, height: 40 }} />
+                                        {/* <Image src={session?.user?.image} width={50} height={50} /> */}
                                     </IconButton>
                                 </Tooltip>
                                 <Menu
