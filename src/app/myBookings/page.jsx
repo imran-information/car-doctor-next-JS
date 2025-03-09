@@ -5,8 +5,8 @@ import Head from 'next/head';
 import { headers } from 'next/headers';
 
 const allMyBookings = async () => {
-    const res = await fetch('http://localhost:3000/api/service', {
-        headers: await headers()
+    const res = await fetch('https://car-doctor-next-js.vercel.app/api/service', {
+        headers: new Headers(await headers())
     })
     const myBookingsData = await res.json()
     return myBookingsData
@@ -16,7 +16,7 @@ export default async function MyBookingsPage() {
     // // console.log(myBookings);
     // useEffect(() => {
     //     const allMyBookings = async () => {
-    //         const res = await fetch('http://localhost:3000/api/service')
+    //         const res = await fetch('https://car-doctor-next-js.vercel.app/api/service')
     //         const myBookingsData = await res.json()
     //         setMyBookings(myBookingsData)
     //     }

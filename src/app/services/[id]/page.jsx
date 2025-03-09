@@ -9,7 +9,7 @@ import TopBanner from "@/components/shared/TopBanner";
 
 export default async function ServiceDetailsPage({ params }) {
     const p = await params;
-    const response = await fetch(`http://localhost:3000/api/service/${p.id}`)
+    const response = await fetch(`https://car-doctor-next-js.vercel.app/api/service/${p.id}`)
     const serviceData = await response.json()
 
     const { title, img, price, _id, description, facility } = serviceData;

@@ -1,5 +1,5 @@
 import { MongoClient, ServerApiVersion } from 'mongodb';
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.eedxn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+// const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.eedxn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 export const collectionName = {
     services: "services",
@@ -10,6 +10,7 @@ export const collectionName = {
 }
 
 export default function dbConnect(collectionName) {
+    const uri = process.env.NEXT_PUBLIC_MONGODB_URI
     const client = new MongoClient(uri, {
         serverApi: {
             version: ServerApiVersion.v1,
@@ -17,6 +18,7 @@ export default function dbConnect(collectionName) {
             deprecationErrors: true,
         }
     });
+    
     return client.db(process.env.DB_USER).collection(collectionName)
 }
 
