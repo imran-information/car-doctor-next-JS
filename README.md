@@ -1,5 +1,10 @@
 # Car Doctor Next.js
 
+## Live Link
+
+Check out the live project: [Car Doctor Next.js](https://car-doctor-next-js.vercel.app)
+
+
 ## Description
 
 Car Doctor is a web application built with Next.js that provides car repair services. Users can view available services, book appointments, and manage their bookings.
@@ -10,7 +15,7 @@ To get started with the project, follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/car-doctor-next-js.git
+    git clone https://github.com/imran-information/car-doctor-next-JS
     ```
 
 2. Navigate to the project directory:
