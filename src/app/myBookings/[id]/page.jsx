@@ -1,10 +1,13 @@
 import BookingUpdateForm from "@/components/BookingUpdate/BookingUpdateForm";
 import TopBanner from "@/components/shared/TopBanner";
 import Head from "next/head";
+import { headers } from "next/headers";
 
 export default async function UpdateBookingPage({ params }) {
     const p = await params;
-    const response = await fetch(`http://localhost:3000/api/myBookings/${p.id}`)
+    const response = await fetch(`http://localhost:3000/api/myBookings/${p.id}`, {
+        headers: await headers()
+    })
     const bookingData = await response.json()
 
     return (

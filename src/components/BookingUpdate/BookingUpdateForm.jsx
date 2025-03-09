@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+
 import { TextField, Button, Box, Grid } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { toast } from "material-react-toastify";
@@ -11,27 +11,25 @@ const BookingUpdateForm = ({ bookingData }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        toast.info("Updating booking..."); 
+        const form = e.target
+        toast.info("Updating booking...");
         const formData = {
-            customerName: session?.user?.name,
-            email: session?.user?.email,
-            price: bookingData?.price,
-            phone: "",
-            message: "",
-            address: "",
-            date: bookingData?.date || new Date().toISOString().split("T")[0],
+            phone: form.phone.value,
+            message: form.message.value,
+            address: form.message.value,
+            date: new Date(form.date.value).toISOString().split("T")[0],
         }
-        
-        const response = await fetch(`/api/bookings/${bookingData._id}`, {
-            method: "PUT",
+
+        console.log(formData);
+        const response = await fetch(`/api/myBookings/${bookingData._id}`, {
+            method: "PATCH",
             body: JSON.stringify(formData),
-            headers: {
-                "Content-Type": "application/json",
-            },
         });
 
         const updatedData = await response.json();
-        if (updatedData.success) {
+        // console.log(updatedData);
+
+        if (updatedData.modifiedCount) {
             toast.success("Booking updated successfully!");
             router.push("/myBookings");
         } else {
@@ -62,9 +60,7 @@ const BookingUpdateForm = ({ bookingData }) => {
                             variant="outlined"
                             fullWidth
                             required
-                            value={formData.customerName}
-                            error={!!errors.customerName}
-                            helperText={errors.customerName || ""}
+                            value={bookingData.customerName}
                             sx={{
                                 "& .MuiOutlinedInput-root": { "&.Mui-focused fieldset": { borderColor: "#FF3811" } },
                                 "& .MuiInputLabel-root": { color: "#000" },
@@ -83,9 +79,7 @@ const BookingUpdateForm = ({ bookingData }) => {
                             fullWidth
                             required
                             type="email"
-                            value={formData.email}
-                            error={!!errors.email}
-                            helperText={errors.email || ""}
+                            value={bookingData.email}
                             sx={{
                                 "& .MuiOutlinedInput-root": { "&.Mui-focused fieldset": { borderColor: "#FF3811" } },
                                 "& .MuiInputLabel-root": { color: "#000" },
@@ -103,9 +97,7 @@ const BookingUpdateForm = ({ bookingData }) => {
                             variant="outlined"
                             fullWidth
                             required
-                            value={formData.price}
-                            error={!!errors.price}
-                            helperText={errors.price || ""}
+                            value={bookingData.price}
                             sx={{
                                 "& .MuiOutlinedInput-root": { "&.Mui-focused fieldset": { borderColor: "#FF3811" } },
                                 "& .MuiInputLabel-root": { color: "#000" },
@@ -123,10 +115,7 @@ const BookingUpdateForm = ({ bookingData }) => {
                             fullWidth
                             required
                             type="date"
-                            value={formData.date}
-                            onChange={handleChange}
-                            error={!!errors.date}
-                            helperText={errors.date || ""}
+                            defaultValue={bookingData.date}
                             sx={{
                                 "& .MuiOutlinedInput-root": { "&.Mui-focused fieldset": { borderColor: "#FF3811" } },
                                 "& .MuiInputLabel-root": { color: "#000" },
@@ -144,10 +133,7 @@ const BookingUpdateForm = ({ bookingData }) => {
                             fullWidth
                             required
                             type="tel"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            error={!!errors.phone}
-                            helperText={errors.phone || ""}
+                            defaultValue={bookingData.phone}
                             sx={{
                                 "& .MuiOutlinedInput-root": { "&.Mui-focused fieldset": { borderColor: "#FF3811" } },
                                 "& .MuiInputLabel-root": { color: "#000" },
@@ -164,10 +150,7 @@ const BookingUpdateForm = ({ bookingData }) => {
                             variant="outlined"
                             fullWidth
                             required
-                            value={formData.address}
-                            error={!!errors.address}
-                            helperText={errors.address || ""}
-                            onChange={handleChange}
+                            defaultValue={bookingData.address}
                             sx={{
                                 "& .MuiOutlinedInput-root": { "&.Mui-focused fieldset": { borderColor: "#FF3811" } },
                                 "& .MuiInputLabel-root": { color: "#000" },
@@ -187,10 +170,7 @@ const BookingUpdateForm = ({ bookingData }) => {
                             multiline
                             rows={4}
                             required
-                            value={formData.message}
-                            onChange={handleChange}
-                            error={!!errors.message}
-                            helperText={errors.message || ""}
+                            defaultValue={bookingData.message}
                             sx={{
                                 "& .MuiOutlinedInput-root": { "&.Mui-focused fieldset": { borderColor: "#FF3811" } },
                                 "& .MuiInputLabel-root": { color: "#000" },
